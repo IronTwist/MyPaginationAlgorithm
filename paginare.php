@@ -113,9 +113,9 @@ function generarePaginareObiect($data, $elPerPage){
             // echo $endAfisare;
            
             while($startAfisare < $endAfisare){
-                if(isset($data[$startAfisare]))
-                echo "<p>Nume: ".$data[$startAfisare]->getNume()." Prenume: ".$data[$startAfisare]->getPrenume()."</p>";
-    
+                if(isset($data[$startAfisare])){
+                    echo "<p>Nume: ".$data[$startAfisare]->getNume()." Prenume: ".$data[$startAfisare]->getPrenume()."</p>";
+                }
                 $startAfisare += 1;
             }
         }
@@ -131,5 +131,68 @@ function generarePaginareObiect($data, $elPerPage){
     }
 }
 
+//Fixed with _GET['p'] page on object page
+
+function generarePaginarePosts($data, $elPerPage){
+
+    if(!isset($_GET["p"])){
+        $_GET["p"] = 1;
+    }
+
+    $numarElemente = count($data);
+    $pagini = 0;
+    $elementPerPage = $elPerPage;
+    $currentPage = $_GET["p"];  //pag 1
+    $nextPage = 0;
+
+    $pagini = numaraPagini($numarElemente, $elementPerPage);
+
+    if(isset($_GET["p"])){
+        $nextPage = $_GET["p"] + 1;
+    }
+
+    if(isset($_GET["p"])){
+        $previousPage = $_GET["p"] - 1;
+    }
+
+    for($p = 1; $p <= $pagini; $p++){
+         
+        if($currentPage == $p){     // 1 == 0
+            echo "Pagina: ". $p;
+            echo "</br>";
+
+            $startAfisare = ($p-1) * $elementPerPage; 
+            // echo $startAfisare;
+            $endAfisare =$startAfisare + $elementPerPage; 
+            // echo $endAfisare;
+           
+            while($startAfisare < $endAfisare){
+
+                if(isset($data[$startAfisare])){
+                    $post = $data[$startAfisare];
+                    echo "</br>";
+                    echo "id: ".$post->getId()."</br>";
+                    echo "title: ".$post->getTitle()."</br>";
+                    echo "content: ".$post->getContent()."</br>";
+                    echo "data: ".$post->getDateTime()."</br>";
+                }
+
+                $startAfisare += 1;
+            }
+        }
+    }
+
+    //
+    if($currentPage > 1){
+        echo "<a href=\"http://localhost/paginare?p=".$previousPage."\">previousPage</a>"; 
+    }
+        echo " | ";
+    if($currentPage < $pagini){
+        echo "<a href=\"http://localhost/paginare?p=".$nextPage."\">nextPage</a>";
+    }
+    if ($currentPage != $pagini) {
+        echo " | <a href=\"http://localhost/paginare?p=".$pagini."\">lastpage</a>";
+    }
+}
 
 ?>
