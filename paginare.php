@@ -14,7 +14,7 @@ function numaraPagini($numarElemente, $elPerPage){
 }
 
 
-function generarePaginare($data, $elPerPage){
+function generarePaginareString($data, $elPerPage){
 
     if(!isset($_GET["p"])){
         $_GET["p"] = 1;
@@ -45,15 +45,30 @@ function generarePaginare($data, $elPerPage){
             // echo $startAfisare;
             $endAfisare =$startAfisare + $elementPerPage; //2    4+2=6
             // echo $endAfisare;
-           
+    
             while($startAfisare < $endAfisare){
                 if(isset($data[$startAfisare]))
+
+                //show data 
                 echo "<p>".$data[$startAfisare]."</p>";
     
                 $startAfisare += 1;
             }
         }
     }
+
+
+    //TODO get URL and change for navigation 
+
+    // if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+    //      $url = "https://";   
+    // else  
+    //      $url = "http://";   
+ 
+    // $url.= $_SERVER['HTTP_HOST'];  
+    // $url.= $_SERVER['REQUEST_URI'];    
+
+
 
     if($currentPage > 0){
         echo "<a href=\"http://localhost/paginare?p=".$previousPage."\">previousPage</a>"; 
@@ -106,6 +121,7 @@ function generarePaginareObiect($data, $elPerPage){
         }
     }
 
+    //
     if($currentPage > 0){
         echo "<a href=\"http://localhost/paginare?p=".$previousPage."\">previousPage</a>"; 
     }

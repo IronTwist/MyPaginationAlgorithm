@@ -2,7 +2,7 @@
     require_once('paginare.php');
     require_once('User.php');
 
-    // $elements = ["razvan", "andrei", "claudiu", "mihai", "petre", "vasile", "liviu", "george"];
+    $elements2 = ["razvan", "andrei", "claudiu", "mihai", "petre", "vasile", "liviu", "george"];
 
      $user1 = new User("Fratean", "RAzvan");
      $user2 = new User("Fratean2", "RAzvan2");
@@ -21,6 +21,8 @@
     // var_dump($elements);
 
     generarePaginareObiect($elements, 4);
+    echo "</br>";
+    generarePaginareString($elements2, 3);
 
     
     ?>
