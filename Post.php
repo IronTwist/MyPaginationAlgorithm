@@ -10,10 +10,9 @@ class Post{
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
-        $this->date = $date;
+        $this->dateTime = $date;
     }
 
-    
     /**
      * Get the value of id
      */ 

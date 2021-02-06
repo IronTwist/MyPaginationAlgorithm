@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * by Fratean Razvan
+ * 
+ *work in progress
+ */
+
 
 function numaraPagini($numarElemente, $elPerPage){
     $countPagini = 0;
